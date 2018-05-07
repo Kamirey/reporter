@@ -1,40 +1,18 @@
-'use strict'
-
 const webpack = require("webpack");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
-
-let appName = "visualizer";
-
-let plugins = [];
-const env = process.env.WEBPACK_ENV;
-
-plugins.push(new VueLoaderPlugin());
-if (env === "production") {
-	const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
-	plugins.push(new UglifyJsPlugin({ minimize: true }));
-	plugins.push(new webpack.DefinePlugin({
-			"process.env": {
-				NODE_ENV: "production"
-			}
-		}
-	));
-
-	appName = appName + '.min.js';
-	}
-else {
-	appName = appName + '.js';
-}
 
 module.exports = {
 	entry: "./src/main.js",
 	output: {
-		path: path.resolve(__dirname, "./build"),
-		filename: appName
+		path: path.resolve(__dirname, "dist"),
+		filename: "[name].[hash].js"
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "./build"),
+		contentBase: path.join(__dirname, "dist"),
 		port: 9000
 	}, 
 	module: {
@@ -49,14 +27,27 @@ module.exports = {
 			},
 			{
 				test: /\.vue$/,
-				use: "vue-loader"
+				loader: "vue-loader",
+				options: {
+					extractCSS: true
+				}
 			}
 		]
 	},
-	resolve: {
-		alias: {
-			"vue": "vue/dist/vue.esm.js"
-		}
-	},
-	plugins
+	plugins: [
+		new CleanWebpackPlugin(["dist"]),
+		new HtmlWebpackPlugin({
+			template: "./src/index.html"
+		}),
+		new ExtractTextPlugin("styles.[chunkhash].css"),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: "runtime"
+		}),
+		new VueLoaderPlugin()
+	],
+	devServer: {
+		contentBase: "./dist",
+		host: "0.0.0.0",
+		port: process.env.PORT || 8081
+	}
 };
