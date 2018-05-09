@@ -44,10 +44,5 @@ module.exports = {
 			name: "runtime"
 		}),
 		new VueLoaderPlugin()
-	],
-	devServer: {
-		contentBase: "./dist",
-		host: "0.0.0.0",
-		port: process.env.PORT || 8081
-	}
+	]
 };
