@@ -43,6 +43,11 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "runtime"
 		}),
-		new VueLoaderPlugin()
+		new VueLoaderPlugin(),
+		new webpack.DefinePlugin({
+			"process.env": {
+				TRACKER_URL: '"http://localhost:8080/"',
+			}
+		})
 	]
 };

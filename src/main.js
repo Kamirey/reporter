@@ -8,3 +8,11 @@ new Vue({
 	el: "#app",
 	render: h => h(App)
 });
+
+const env = process.env;
+console.log(env)
+
+fetch(env.TRACKER_URL + "persons/")
+	.then(response => {
+		console.log("response", response.json());
+	});
