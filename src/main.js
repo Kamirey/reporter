@@ -14,5 +14,8 @@ console.log(env)
 
 fetch(env.TRACKER_URL + "persons/")
 	.then(response => {
-		console.log("response", response.json());
-	});
+		return response.json();
+	})
+	.then(json =>{
+		console.log(json);
+	})
