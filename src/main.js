@@ -1,21 +1,24 @@
 import Vue from "vue";
-import Vuex from "vuex";
 import App from "./App.vue";
+import store from "./store.js";
 
-Vue.use(Vuex);
+
+
+const getPersons = () => {
+	return fetch(process.env.TRACKER_URL + "persons/")
+		.then(response => {
+			return response.json();
+		});
+};
 
 new Vue({
 	el: "#app",
-	render: h => h(App)
+	render: h => h(App),
+	store,
+	created(){
+		getPersons()
+			.then(json => {
+				this.$store.commit("setPersons", json.results);
+			});
+	}
 });
-
-const env = process.env;
-console.log(env);
-
-fetch(env.TRACKER_URL + "persons/")
-	.then(response => {
-		return response.json();
-	})
-	.then(json =>{
-		console.log(json);
-	});
