@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const { VueLoaderPlugin } = require("vue-loader");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
 	entry: "./src/main.js",
@@ -31,6 +31,11 @@ module.exports = {
 				options: {
 					extractCSS: true
 				}
+			},
+			{
+				test: /\.less$/,
+				exclude: /node_modules/,
+				use: ["style-loader", "css-loader", "less-loader"]
 			}
 		]
 	},
@@ -46,7 +51,7 @@ module.exports = {
 		new VueLoaderPlugin(),
 		new webpack.DefinePlugin({
 			"process.env": {
-				TRACKER_URL: '"http://localhost:8080/"',
+				TRACKER_URL: "'http://localhost:8080/'",
 			}
 		})
 	]
