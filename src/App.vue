@@ -1,11 +1,15 @@
 <template>
 	<div id="app">
-		Hello World!
+		<login-screen></login-screen>
 	</div>
 </template>
 
 <script>
-export default {
+import loginScreen from "./pages/LoginScreen.vue";
 
+export default {
+	components: {
+		loginScreen
+	}
 }
 </script>

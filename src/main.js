@@ -2,8 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store.js";
 
-
-
 const getPersons = () => {
 	return fetch(process.env.TRACKER_URL + "persons/")
 		.then(response => {
