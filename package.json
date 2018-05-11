@@ -7,7 +7,8 @@
 		"test": "test",
 		"build": "webpack-dev-server --inline --hot --config webpack.dev.js",
 		"buildDev": "webpack --config webpack.dev.js",
-		"start": "concurrently -k \"node server.js\" \"webpack --config webpack.dev.js --watch\""
+		"start": "npm run lint && concurrently -k \"node server.js\" \"webpack --config webpack.dev.js --watch\"",
+		"lint": "eslint ./src"
 	},
 	"repository": {
 		"type": "git",
@@ -35,6 +36,7 @@
 	"devDependencies": {
 		"clean-webpack-plugin": "^0.1.19",
 		"concurrently": "^3.5.1",
+		"eslint": "^4.19.1",
 		"extract-text-webpack-plugin": "^3.0.2",
 		"html-webpack-plugin": "^3.2.0",
 		"webpack": "^3.5.5",

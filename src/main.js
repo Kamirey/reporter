@@ -10,7 +10,7 @@ new Vue({
 });
 
 const env = process.env;
-console.log(env)
+console.log(env);
 
 fetch(env.TRACKER_URL + "persons/")
 	.then(response => {
@@ -18,4 +18,4 @@ fetch(env.TRACKER_URL + "persons/")
 	})
 	.then(json =>{
 		console.log(json);
-	})
+	});
