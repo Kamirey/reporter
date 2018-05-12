@@ -19,6 +19,7 @@
 
 <script>
 import modal from "../components/Modal.vue";
+import { router } from "../main.js";
 
 export default {
 	components: {
@@ -29,12 +30,12 @@ export default {
 			showLogin: false,
 			searchText: "",
 			showModal: false,
-			userNotFoundText: "User not found, please try again"
+			userNotFoundText: "User not known."
 		};
 	},
 	methods: {
 		onClickNewUser() {
-			
+			router.push("newuser");
 		},
 		onClickExistingUser() {
 			this.showLogin = true;
