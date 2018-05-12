@@ -1,14 +1,19 @@
 <template>
 	<div id="login-screen">
-		<div id="login-block">
+		<div v-if="!showLogin" id="login-block">
+			<button id="new-user-button" class="columnbutton" type="button" @click="onClickNewUser">New user</button>
+			<button id="existing-user-button" class="columnbutton" type="button" @click="onClickExistingUser">Existing user</button>
+		</div>
+		<div v-else id="login-block">
 			<div class="login-input-row">
 				<label id="user-label" for="user-input">Username</label>
 				<input class="input-field" id="user-input" type="text" v-model="searchText">
-				</div>
+			</div>
 			<br>
-			<button id="login-button" type="button" @click="onClickLogin">Log in</button>
+			<button id="login-button" class="rowbutton" type="button" @click="onClickLogin">Log in</button>
+			<button id="cancel-button" class="rowbutton" type="button" @click="onClickCancel">Cancel</button>
 		</div>
-		<modal v-if="showModal" header="Not Found" :text="userNotFoundText" primaryButton="Ok" secondaryButton="Cancel" @primaryClicked="showModal=false" @secondaryClicked="showModal=false"></modal>
+		<modal v-if="showModal" header="Not Found" :text="userNotFoundText" primaryButton="Ok" secondaryButton="" @primaryClicked="showModal=false" @secondaryClicked="showModal=false"></modal>
 	</div>
 </template>
 
@@ -21,12 +26,19 @@ export default {
 	},
 	data() {
 		return {
+			showLogin: false,
 			searchText: "",
 			showModal: false,
 			userNotFoundText: "User not found, please try again"
 		};
 	},
 	methods: {
+		onClickNewUser() {
+			
+		},
+		onClickExistingUser() {
+			this.showLogin = true;
+		},
 		onClickLogin() {
 			const user = this.users.find(user => user.name === this.searchText);
 			if (user !== undefined) {
@@ -35,11 +47,14 @@ export default {
 			else {
 				this.showModal = true;
 			}
+		},
+		onClickCancel() {
+			this.showLogin = false;
 		}
 	},
 	computed: {
 		users: function() {
-			return this.$store.state.persons.map(person => {return {id: person.id, name: person.name};});
+			return this.$store.state.persons;
 		}
 	}
 }
@@ -69,8 +84,13 @@ export default {
 		width: auto;
 	}
 
-	#login-button {
-		width: 200px;
+	.rowbutton {
+		width: 112px;
 		margin: auto;
+	}
+
+	.columnbutton {
+		width: 225px;
+		margin-bottom: 6px;
 	}
 </style>

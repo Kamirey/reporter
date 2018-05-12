@@ -9,7 +9,7 @@
 			</div>
 			<div class="modal-footer">
 				<button @click="onClickPrimary">{{primaryButton}}</button>
-				<button @click="onClickSecondary">{{secondaryButton}}</button>
+				<button @click="onClickSecondary" v-if="secondaryButton !== ''">{{secondaryButton}}</button>
 			</div>
 		</div>
 	</div>
@@ -63,5 +63,9 @@ export default {
 		bottom: 0;
 		right: 0;
 		padding: 6px;
+	}
+
+	button {
+		width: 112px;
 	}
 </style>
