@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import {get} from "./util.js";
+import { get, post } from "./util.js";
 
 Vue.use(Vuex);
 
@@ -13,11 +13,22 @@ export default new Vuex.Store({
 	},
 	actions: {
 		loadUserData({commit}, userId) {
-			get("persons/" + userId)
+			get("/persons/" + userId)
 				.then(data => {
 					commit("setWeightRecords", data.weightRecords);
-					commit("setHeight", data.heightInCm);
+					commit("setHeight", data.height);
 				});
+		},
+		createUser({commit}, data) {
+			post("/persons/", data.person)
+				.then(
+					response => response.json()
+				)
+				.then(
+					body => post("/weightRecords/" + body.id, data.weightRecord)
+				);
+			commit("setWeightRecords", [data.weightRecord]);
+			commit("setHeight", data.height);
 		}
 	},
 	mutations: {

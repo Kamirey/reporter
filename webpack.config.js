@@ -51,7 +51,7 @@ module.exports = {
 		new VueLoaderPlugin(),
 		new webpack.DefinePlugin({
 			"process.env": {
-				TRACKER_URL: "'http://localhost:8080/'",
+				TRACKER_URL: "'http://localhost:8080/'"
 			}
 		})
 	]

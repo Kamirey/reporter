@@ -68,4 +68,8 @@ export default {
 	button {
 		width: 112px;
 	}
+
+	label {
+		width: 200px;
+	}
 </style>

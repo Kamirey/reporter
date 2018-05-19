@@ -81,12 +81,8 @@ export default {
 		margin-left: -150px;
 	}
 
-	#user-input {
-		width: auto;
-	}
-
 	.rowbutton {
-		width: 112px;
+		width: 129px;
 		margin: auto;
 	}
 
