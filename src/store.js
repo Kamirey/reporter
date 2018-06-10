@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		persons: [],
+		userName: "",
 		height: 0,
 		weightRecords: []
 	},
@@ -15,8 +16,11 @@ export default new Vuex.Store({
 		loadUserData({commit}, userId) {
 			get("/persons/" + userId)
 				.then(data => {
-					commit("setWeightRecords", data.weightRecords);
-					commit("setHeight", data.height);
+					commit("setLoggedInUser", {
+						name: data.name,
+						height: data.height,
+						weightRecords: data.weightRecords
+					});
 				});
 		},
 		createUser({commit}, data) {
@@ -27,18 +31,20 @@ export default new Vuex.Store({
 				.then(
 					body => post("/weightRecords/" + body.id, data.weightRecord)
 				);
-			commit("setWeightRecords", [data.weightRecord]);
-			commit("setHeight", data.height);
+			commit("setLoggedInUser", {
+				name: data.person.name,
+				height: data.person.height,
+				weightRecords: [data.weightRecord]
+			});
 		}
 	},
 	mutations: {
 		setPersons(state, persons) {
 			state.persons = persons;
 		},
-		setWeightRecords(state, weightRecords) {
+		setLoggedInUser(state, {name, height, weightRecords}) {
+			state.userName = name;
 			state.weightRecords = weightRecords;
-		},
-		setHeight(state, height) {
 			state.height = height;
 		}
 	}
