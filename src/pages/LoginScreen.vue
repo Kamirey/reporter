@@ -1,10 +1,12 @@
 <template>
 	<div id="login-screen">
 		<div v-if="!showLogin" id="login-block">
+			<h2>Weight Tracker</h2>
 			<button id="new-user-button" class="columnbutton" type="button" @click="onClickNewUser">New user</button>
 			<button id="existing-user-button" class="columnbutton" type="button" @click="onClickExistingUser">Existing user</button>
 		</div>
 		<div v-else id="login-block">
+			<h2>Welcome back!</h2>
 			<div class="login-input-row">
 				<label id="user-label" for="user-input">Username</label>
 				<input class="input-field" id="user-input" type="text" v-model="searchText">
@@ -77,7 +79,7 @@ export default {
 		left:50%;
 		width: 300px;
 		height: 100px;
-		margin-top: -50px;
+		margin-top: -150px;
 		margin-left: -150px;
 	}
 
@@ -87,7 +89,8 @@ export default {
 	}
 
 	.columnbutton {
-		width: 225px;
+		width: 220px;
 		margin-bottom: 6px;
+		margin-left: 40px;
 	}
 </style>

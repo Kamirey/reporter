@@ -1,16 +1,19 @@
 <template>
-	<table id="weight_table">
-		<thead>
-			<tr>
-				<th>Date</th>
-				<th>Weight</th>
-				<!-- <th>Weight difference</th>
-				<th>Total weight lost</th> -->
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+	<div>
+		<h1>Weight history</h1>
+		<table id="weight_table">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Weight</th>
+					<!-- <th>Weight difference</th>
+					<th>Total weight lost</th> -->
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 </template>
 
 <script>

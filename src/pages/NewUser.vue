@@ -1,5 +1,6 @@
 <template>
 	<div id="new-user">
+		<h2>New user</h2>
 		<label id="user-label" for="user-input">Username</label>
 		<input class="input-field" id="user-input" type="text" v-model="username">
 		<br>
@@ -68,7 +69,7 @@ export default {
 		left:50%;
 		width: 550px;
 		height: 100px;
-		margin-top: -50px;
+		margin-top: -150px;
 		margin-left: -275px;
 	}
 
