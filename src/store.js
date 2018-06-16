@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import { get, post } from "./util.js";
+import { router } from "./main.js";
 
 Vue.use(Vuex);
 
@@ -11,6 +12,11 @@ export default new Vuex.Store({
 		userName: "",
 		height: 0,
 		weightRecords: []
+	},
+	getters: {
+		getTableData(state) {
+			return state.weightRecords;
+		}
 	},
 	actions: {
 		loadUserData({commit}, userId) {
@@ -46,6 +52,7 @@ export default new Vuex.Store({
 			state.userName = name;
 			state.weightRecords = weightRecords;
 			state.height = height;
+			router.push("/history");
 		}
 	}
 });

@@ -34,7 +34,7 @@ export default {
 	@import "../styles/general.less";
 
 	.modal {
-		border: @border;
+		border: @input-border;
 		position: fixed;
 		background-color: white;
 		float: left;

@@ -4,13 +4,15 @@ import store from "./store.js";
 import VueRouter from "vue-router";
 import LoginScreen from "./pages/LoginScreen.vue";
 import NewUser from "./pages/NewUser.vue";
+import WeightHistory from "./pages/WeightHistory.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
 	{ path: "/", redirect: "/login" },
 	{ path: "/login", component: LoginScreen },
-	{ path: "/newuser", component: NewUser }
+	{ path: "/newuser", component: NewUser },
+	{ path: "/history", component: WeightHistory }
 ];
 
 export const router = new VueRouter({
