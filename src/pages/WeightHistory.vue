@@ -6,8 +6,8 @@
 				<tr>
 					<th>Date</th>
 					<th>Weight</th>
-					<!-- <th>Weight difference</th>
-					<th>Total weight lost</th> -->
+					<th>Weight difference</th>
+					<th>Total weight lost</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,15 +32,18 @@ export default {
 	},
 	methods: {
 		renderTable() {
+			const tableData = this.tableData;
+
 			$("#weight_table").dataTable({
-				searching: false,
-				data: this.tableData,
+				data: tableData,
 				deferRender: true,
 				scrollY: 200,
 				scrollCollapse: true,
 				scroller: true,
+				searching: false,
 				info: false,
 				paging: false,
+				order: [[ 0, "desc" ]],
 				columns: [
 					{
 						data: "timeStamp",
@@ -48,9 +51,28 @@ export default {
 					},
 					{
 						data: "weight"
-					}//,
-					// { data: "weightDiff" },
-					// { data: "weightLost" }
+					},
+					{
+						data: null,
+						render: datum => {
+							const index = tableData.indexOf(datum);
+							let lost;
+							if (index === tableData.length - 1) {
+								lost = 0;
+							}
+							else {
+								lost = datum.weight - tableData[index + 1].weight;
+							}
+							return lost.toFixed(1);
+						}
+					},
+					{
+						data: "weight",
+						render: datum => {
+							const diff = tableData[tableData.length - 1].weight - datum;
+							return diff.toFixed(1);
+						}
+					}
 				]
 			});
 		}

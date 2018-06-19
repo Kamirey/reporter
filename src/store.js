@@ -50,7 +50,7 @@ export default new Vuex.Store({
 		},
 		setLoggedInUser(state, {name, height, weightRecords}) {
 			state.userName = name;
-			state.weightRecords = weightRecords;
+			state.weightRecords = weightRecords.sort((a, b) => b.timeStamp - a.timeStamp);
 			state.height = height;
 			router.push("/history");
 		}
