@@ -50,7 +50,10 @@ export default {
 						render: datum => moment(datum).format("L")
 					},
 					{
-						data: "weight"
+						data: "weight",
+						render: datum => {
+							return datum + " kg";
+						}
 					},
 					{
 						data: null,
@@ -63,14 +66,14 @@ export default {
 							else {
 								lost = datum.weight - tableData[index + 1].weight;
 							}
-							return lost.toFixed(1);
+							return lost.toFixed(1) + " kg";
 						}
 					},
 					{
 						data: "weight",
 						render: datum => {
 							const diff = tableData[tableData.length - 1].weight - datum;
-							return diff.toFixed(1);
+							return diff.toFixed(1) + " kg";
 						}
 					}
 				]
